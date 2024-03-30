@@ -1,0 +1,25 @@
+From b6e8523bac301eb04c07e264b0274d5164dcec80 Mon Sep 17 00:00:00 2001
+From: Emily <102429049+emily-is-my-username@users.noreply.github.com>
+Date: Sat, 30 Mar 2024 18:48:26 +0100
+Subject: [PATCH] dont build tools static
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index b87e405c..3e249711 100644
+--- a/Makefile
++++ b/Makefile
+@@ -301,7 +301,7 @@ runtests: pcsx-redux-tests
+ 
+ define TOOLDEF
+ $(1): $(SUPPORT_OBJECTS) tools/$(1)/$(1).o
+-	$(LD) -o $(1) $(CPPFLAGS) $(CXXFLAGS) $(SUPPORT_OBJECTS) tools/$(1)/$(1).o -static -lz
++	$(LD) -o $(1) $(CPPFLAGS) $(CXXFLAGS) $(SUPPORT_OBJECTS) tools/$(1)/$(1).o -lz
+ 
+ endef
+ 
+-- 
+2.42.0
+
