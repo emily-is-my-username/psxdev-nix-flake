@@ -16,8 +16,8 @@ in {
     flakeRev =
       if sourceInfo ? dirtyShortRev
       then sourceInfo.dirtyShortRev
-      else if sourceInfo ? rev
-      then sourceInfo.rev
+      else if sourceInfo ? shortRev
+      then sourceInfo.shortRev
       else "unknown";
 
     openbios =
