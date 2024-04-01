@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    ./util/cross-compilation.nix
+    ./cross-compilation.nix
   ];
   perSystem = {
     system,

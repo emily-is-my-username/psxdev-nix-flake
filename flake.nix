@@ -10,8 +10,8 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
-        ./flake-modules/psx-pkgs.nix
-        ./flake-modules/pcsx-redux.nix
+        ./util/psx-pkgs.nix
+        ./packages/pcsx-redux
       ];
       _module.args.flakeName = "emily-psxdev";
 
