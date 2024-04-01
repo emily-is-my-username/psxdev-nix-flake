@@ -1,7 +1,7 @@
 {
   lib,
   # selects source and version
-  gitRev ? "9d2249aee4d8122509ac2a8371eb1592de8b0cfc",
+  gitRev ? "e6bf14c6c7f1bb7f2e86c004c00c1f32918beb21",
   flakeRev ? null, # setting this caueses rebuilds
   flakeName ? "nix",
   # build tools
@@ -26,17 +26,33 @@
   imagemagick,
 }: let
   inherit (builtins) concatStringsSep fetchGit toJSON;
-  inherit (lib.lists) optional toList;
+  inherit (lib.lists) optional optionals toList;
 
-  revMap = {
-    "9d2249aee4d8122509ac2a8371eb1592de8b0cfc".hash = "sha256-PSLQkiKaCz6SghPFpt0UYIP0FOYaqgxry8Z7uvESIPI=";
-  };
+  # per-revision config. Allows us to support multiple versions.
+  # newer versions should be at the top
+  revConfig =
+    {
+      "e6bf14c6c7f1bb7f2e86c004c00c1f32918beb21" = {
+        hash = "sha256-8RnBQKEIGVg3/FHs4NnVjaIKDrLk+wzEnGleTJLyztM=";
+        patches = [
+          ./patches/0001-dont-build-tools-static.patch
+        ];
+      };
+      "9d2249aee4d8122509ac2a8371eb1592de8b0cfc" = {
+        hash = "sha256-PSLQkiKaCz6SghPFpt0UYIP0FOYaqgxry8Z7uvESIPI=";
+        patches = [
+          ./patches/0001-dont-build-tools-static.patch
+          ./patches/0002-allow-version-info-file-without-updateInfo.patch
+        ];
+      };
+    }
+    .${gitRev};
 
   src = fetchFromGitHub {
     owner = "grumpycoders";
     repo = "pcsx-redux";
     rev = gitRev;
-    hash = revMap.${gitRev}.hash;
+    hash = revConfig.hash;
     fetchSubmodules = true;
   };
 
@@ -53,10 +69,7 @@ in
     inherit version src;
     pname = "pcsx-redux";
 
-    patches = [
-      ./patches/0001-dont-build-tools-static.patch
-      ./patches/0002-allow-version-info-file-without-updateInfo.patch
-    ];
+    patches = optionals (revConfig ? patches) revConfig.patches;
 
     enableParallelBuilding = true;
 
