@@ -2,9 +2,7 @@
   self,
   flakeName,
   ...
-}: let
-  inherit (builtins) mapAttrs elem;
-in {
+}: {
   perSystem = {
     config,
     pkgs,

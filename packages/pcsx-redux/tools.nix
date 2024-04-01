@@ -12,7 +12,7 @@
   ffmpeg-full,
   ...
 }: let
-  inherit (builtins) concatStringsSep fetchGit toJSON;
+  inherit (builtins) concatStringsSep;
 in
   stdenv.mkDerivation {
     inherit (pcsx-redux) src version patches enableParallelBuilding makeFlags meta;

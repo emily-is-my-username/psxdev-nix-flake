@@ -1,6 +1,5 @@
 {lib, ...}: let
   inherit (builtins) mapAttrs elem;
-  inherit (lib.modules) mkMerge;
   inherit (lib.options) mkOption;
   inherit (lib.types) attrsOf unspecified;
 in {

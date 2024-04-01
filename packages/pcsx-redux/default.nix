@@ -26,7 +26,7 @@
   imagemagick,
 }: let
   inherit (builtins) concatStringsSep fetchGit toJSON;
-  inherit (lib.lists) optional optionals toList;
+  inherit (lib.lists) optional optionals;
 
   # per-revision config. Allows us to support multiple versions.
   # newer versions should be at the top
