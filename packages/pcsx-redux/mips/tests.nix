@@ -1,9 +1,12 @@
 {
   stdenv,
-  pcsx-redux,
+  src,
 }:
 stdenv.mkDerivation {
-  inherit (pcsx-redux) src version;
+  inherit src;
+  inherit (src) version;
+  inherit (src.config) patches;
+
   pname = "pcsx-redux-psx-tests";
 
   makeFlags = ["-C" "src/mips/tests" "PCSX_TESTS=true"];

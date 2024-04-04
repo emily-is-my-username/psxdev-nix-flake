@@ -18,19 +18,31 @@
       then sourceInfo.shortRev
       else "unknown";
 
+    pcsx-redux-src-full =
+      pkgs.callPackage
+      ./source.nix
+      {inherit flakeRev flakeName;};
+
+    pcsx-redux-src-main = pcsx-redux-src-full.override {profile = "main";};
+    pcsx-redux-src-mips = pcsx-redux-src-full.override {profile = "mips";};
+    pcsx-redux-src-tools = pcsx-redux-src-full.override {profile = "tools";};
+
     openbios =
-      pkgsCross.PSX.callPackage ./openbios.nix {inherit pcsx-redux;};
+      pkgsCross.PSX.callPackage ./mips/openbios.nix {src = pcsx-redux-src-mips;};
 
     psx-tests =
-      pkgsCross.PSX.callPackage ./psx-tests.nix {inherit pcsx-redux;};
+      pkgsCross.PSX.callPackage ./mips/tests.nix {src = pcsx-redux-src-mips;};
 
     pcsx-redux =
       pkgs.callPackage
-      ./pcsx-redux.nix
-      {inherit openbios flakeName psx-tests;};
+      ./main/pcsx-redux.nix
+      {
+        inherit openbios psx-tests;
+        src = pcsx-redux-src-main;
+      };
 
     pcsx-redux-tools =
-      pkgs.callPackage ./tools.nix {inherit pcsx-redux;};
+      pkgs.callPackage ./main/tools.nix {src = pcsx-redux-src-tools;};
 
     # don't build and run tests
     # also removes dependency on openbios and mips toolchain
@@ -46,7 +58,7 @@
 
     pcsx-redux-with-openbios = let
       stable = pcsx-redux;
-      full = pcsx-redux.override {inherit flakeRev;};
+      full = pcsx-redux.override {fullVersionInfo = true;};
     in
       pkgs.symlinkJoin {
         inherit (full) name;

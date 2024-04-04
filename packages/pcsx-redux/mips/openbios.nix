@@ -1,10 +1,13 @@
 {
   stdenv,
   lib,
-  pcsx-redux,
+  src,
 }:
 stdenv.mkDerivation {
-  inherit (pcsx-redux) src version;
+  inherit src;
+  inherit (src) version;
+  inherit (src.config) patches;
+
   pname = "openbios";
 
   makeFlags = ["-C" "src/mips/openbios"];
