@@ -1,7 +1,7 @@
 {
   lib,
   fetchFromGitHub,
-  gitRev ? "e6bf14c6c7f1bb7f2e86c004c00c1f32918beb21",
+  gitRev ? "62ee5c90b65a40841592a70d0bd66cde31782d3a",
   flakeRev ? null,
   flakeName ? "nix",
   profile ? "full",
@@ -14,6 +14,14 @@
   # newer versions should be at the top
   config = let
     configMap = rec {
+      #5879
+      "62ee5c90b65a40841592a70d0bd66cde31782d3a" = rec {
+        main.hash = "sha256-qY90dwlQuapO28eqnlmallvHILddkTyDNe+XmiRQqDI=";
+        mips.hash = "sha256-7NONEyyLp2jQc2GeglGJqKf7GUpFWpX8AeikhaJCbBA=";
+        tools.hash = "sha256-ea8nYd/REwJscZRJ2mQgSQeaPMekaJWkLKI6ncBQyh8=";
+      };
+
+      #5840
       "e6bf14c6c7f1bb7f2e86c004c00c1f32918beb21" = rec {
         full.hash = "sha256-8RnBQKEIGVg3/FHs4NnVjaIKDrLk+wzEnGleTJLyztM=";
         main.hash = "sha256-yFIxiV6KmBsGo2sqIwncy9m87A1Hoa8/4XBw3auYeQ4=";
