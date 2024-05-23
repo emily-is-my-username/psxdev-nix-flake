@@ -24,10 +24,6 @@
       psn00bsdk-examples = pkgsCross.PSX.callPackage ./examples.nix {
         inherit src psn00bsdk-libpsn00b psn00bsdk-tools psn00bsdk-mkpsxiso;
       };
-
-      psn00bsdk-examples-n00bdemo-with-pcsx-redux = pkgs.writeScriptBin "run-n00bdemo" ''
-        ${self'.packages.pcsx-redux-with-openbios}/bin/pcsx-redux -stdout -run -exe ${psn00bsdk-examples}/demos/n00bdemo.exe
-      '';
     };
   };
 }
