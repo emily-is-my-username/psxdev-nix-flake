@@ -2,6 +2,19 @@
 
 A collection of nix packages for Playstation 1 homebrew tools
 
+## Quickstart
+
+To download, compile and run PSn00bSDK's `n00bdemo` example with pcsx-redux and openbios:
+
+```
+nix run github:emily-is-my-username/psxdev-nix-flake#run-n00bdemo-with-pcsx-redux
+```
+
+## Package list
+
+- [pcsx-redux](#pcsx-redux)
+- [PSn00bSDK](#psn00bsdk)
+
 ## Package notes
 
 ### [pcsx-redux](https://github.com/grumpycoders/pcsx-redux)
@@ -28,6 +41,22 @@ A collection of nix packages for Playstation 1 homebrew tools
 
 - There may be [audio issues on NixOS with unpatched miniaudio](https://github.com/NixOS/nixpkgs/pull/227972#issuecomment-1521020590). I am using pipewire and had no issues so far. If you encounter anything, let me know.
 
+### [PSn00bSDK](https://github.com/Lameguy64/PSn00bSDK)
+
+#### Packages
+- `psn00bsdk-libpsn00b`:  
+  The main MIPS library package
+
+- `psn00bsdk-mkpsxiso`
+
+- `psn00bsdk-tools`
+
+- `psn00bsdk-examples`
+
+### Misc
+
+- `run-n00bdemo-with-pcsx-redux`:  
+  Example entrypoint script to start n00bdemo (from `psn00bsdk-examples`) with pcsx-redux
 
 ## License note
 

@@ -11,7 +11,9 @@
       systems = ["x86_64-linux"];
       imports = [
         ./util/psx-pkgs.nix
+        ./util/runner-scripts.nix
         ./packages/pcsx-redux
+        ./packages/PSn00bSDK
       ];
       _module.args.flakeName = "emily-psxdev";
 
