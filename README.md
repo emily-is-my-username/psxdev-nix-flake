@@ -14,17 +14,16 @@ nix run github:emily-is-my-username/psxdev-nix-flake#run-n00bdemo-with-pcsx-redu
 
 - [pcsx-redux](#pcsx-redux)
 - [PSn00bSDK](#psn00bsdk)
+- [misc](#misc)
 
-## Package notes
+## [pcsx-redux](https://github.com/grumpycoders/pcsx-redux)
 
-### [pcsx-redux](https://github.com/grumpycoders/pcsx-redux)
-
-#### Packages
-- `openbios`:
+### Packages
+- `openbios`:  
   The [open source PSX BIOS](https://github.com/grumpycoders/pcsx-redux/tree/main/src/mips/openbios) provided by pcsx-redux.
   - Requires a MIPS1 toolchain, which is not cached by cache.nixos.org, so **it may take a long time to build this for the first time**.
 
-- `pcsx-redux`:
+- `pcsx-redux`:  
   The main package. Includes everything the upstream Makefile would install.  
   - **Building this package requires the BIOS to run tests.** Use `pcsx-redux-untested` if you don't want to build `openbios`.
 
@@ -37,13 +36,13 @@ nix run github:emily-is-my-username/psxdev-nix-flake#run-n00bdemo-with-pcsx-redu
 - `pcsx-redux-with-openbios`:  
   `pcsx-redux` and `openbios` packaged together in an environment where the emulator can find `openbios` as a fallback BIOS.
 
-#### Known Issues
+### Known Issues
 
 - There may be [audio issues on NixOS with unpatched miniaudio](https://github.com/NixOS/nixpkgs/pull/227972#issuecomment-1521020590). I am using pipewire and had no issues so far. If you encounter anything, let me know.
 
-### [PSn00bSDK](https://github.com/Lameguy64/PSn00bSDK)
+## [PSn00bSDK](https://github.com/Lameguy64/PSn00bSDK)
 
-#### Packages
+### Packages
 - `psn00bsdk-libpsn00b`:  
   The main MIPS library package
 
@@ -53,7 +52,7 @@ nix run github:emily-is-my-username/psxdev-nix-flake#run-n00bdemo-with-pcsx-redu
 
 - `psn00bsdk-examples`
 
-### Misc
+## Misc
 
 - `run-n00bdemo-with-pcsx-redux`:  
   Example entrypoint script to start n00bdemo (from `psn00bsdk-examples`) with pcsx-redux
