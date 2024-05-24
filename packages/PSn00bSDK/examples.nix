@@ -27,4 +27,13 @@ stdenv.mkDerivation {
   buildInputs = [
     psn00bsdk-libpsn00b
   ];
+
+  meta = {
+    homepage = "https://github.com/Lameguy64/PSn00bSDK/tree/master/examples";
+    maintainer = {
+      name = "Emily Username";
+      github = "emily-is-my-username";
+    };
+    platforms = ["mipsel-none"];
+  };
 }

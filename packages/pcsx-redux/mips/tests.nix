@@ -16,4 +16,8 @@ stdenv.mkDerivation {
       install -D -m666 -t $out/$tname/ src/mips/tests/$tname/$tname.ps-exe
     done
   '';
+
+  meta = {
+    platforms = ["mipsel-none"];
+  };
 }
